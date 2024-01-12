@@ -5,10 +5,12 @@
     
 	<title>Gerador de Assinatura de E-mail Rede Primavera</title>
 
+	<!-- Importa biblioteca hmtl2canvas.js para gerar a imagem -->
 	<script src='html2canvas.js'></script>
 
+	<!-- Formata borda do DIV Assinatura para recorte da imagem -->
 	<style>
-        #signature {
+        #Assinatura {
             border: 1px solid white;
             padding: 4px;
 			width: 500px;
@@ -17,7 +19,7 @@
 </head>
 <body>
   <script>
-    function showSignature() {
+    function exibirAssinatura() {
 		var urlParams = new URLSearchParams(window.location.search);
 		var nome = urlParams.get('nome');
 		var funcao = urlParams.get('funcao');
@@ -27,13 +29,13 @@
 		var email = urlParams.get('email');
 		var logomarca = urlParams.get('logomarca');
 		
-		document.write('<div id="signature">');
+		document.write('<div id="Assinatura">');
 		
-		document.write('<font size="2,5px" face="calibri"></br>');
+		document.write('<font size="3px" face="calibri"></br>');
 		document.write('Atenciosamente,' + '</br></br>');
 		document.write('<b>' + decodeURIComponent(nome) + '</b></br>');
-		document.write('<b>' + decodeURIComponent(funcao) + '</b></br>');
-		document.write('<b>' + decodeURIComponent(telefone) + ' / ' + decodeURIComponent(celular) + ' / Ramal ' + decodeURIComponent(ramal) + '</b></br>');
+		document.write(decodeURIComponent(funcao) + '</br>');
+		document.write(decodeURIComponent(telefone) + ' / ' + decodeURIComponent(celular) + ' / Ramal ' + decodeURIComponent(ramal) + '</br>');
 		document.write('<a href="mailto:' + decodeURIComponent(email) + '">' + decodeURIComponent(email) + '</a></b></br>');
 		document.write('<a href="www.redeprimavera.com.br">www.redeprimavera.com.br</a></br></br>');
 		document.write('</font>');
@@ -49,29 +51,27 @@
 		document.write('</div>');
 	}
 	
-	// function take a screenshot and append it to the output div
+	// Função captura tela com base do DIV Assinatura e inclui a imagem capturada após o DIV capturaAssinatura
 	function takeshot() {
             let div =
-                document.getElementById('signature');
+                document.getElementById('Assinatura');
   
             html2canvas(div).then(
                 function (canvas) {
                     document
-                    .getElementById('output')
+                    .getElementById('capturaAssinatura')
                     .appendChild(canvas);
                 })
         }
 
-	showSignature();
+	exibirAssinatura();
   </script>
 </body>
-
 	</br>
 	<input type="button" Value="Voltar" onclick="history.go(-1)">
 	<input type="button" Value="Salvar" onclick="takeshot()">
 
 	<p>Clique no botão [Salvar] acima para gerar a imagem logo abaixo:</p>
 	
-	<div id="output"></div>
-	
+	<div id="capturaAssinatura"></div>
 </html>
