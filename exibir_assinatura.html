@@ -2,11 +2,22 @@
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>Gerador de Assinatura de E-mail Rede Primavera</title>
+    
+	<title>Gerador de Assinatura de E-mail Rede Primavera</title>
+
+	<script src='html2canvas.js'></script>
+
+	<style>
+        #signature {
+            border: 1px solid white;
+            padding: 4px;
+			width: 500px;
+        }
+	</style>	
 </head>
 <body>
   <script>
-    function exibirAssinatura() {
+    function showSignature() {
 		var urlParams = new URLSearchParams(window.location.search);
 		var nome = urlParams.get('nome');
 		var funcao = urlParams.get('funcao');
@@ -15,7 +26,9 @@
 		var ramal = urlParams.get('ramal');
 		var email = urlParams.get('email');
 		var logomarca = urlParams.get('logomarca');
-	  
+		
+		document.write('<div id="signature">');
+		
 		document.write('<font size="2,5px" face="calibri"></br>');
 		document.write('Atenciosamente,' + '</br></br>');
 		document.write('<b>' + decodeURIComponent(nome) + '</b></br>');
@@ -32,38 +45,33 @@
 		}
 
 		document.write('<div style="position:relative;width:500px"><font size="1" face="calibri" color="gray">Esta mensagem, incluindo seus anexos, é material corporativo de uso privado, tem caráter confidencial e sigiloso protegido por lei, sendo proibida sua utilização, divulgação, cópia ou distribuição por qualquer pessoa diferente do destinatário. Caso tenha sido recebida por engano, queira, por favor, notificar o remetente.</font></div>');
+	
+		document.write('</div>');
 	}
 	
-	exibirAssinatura();
-	
-	function capturarAreaDaTela(left, top, width, height) {
-		// Cria um elemento de canvas temporário
-		var canvas = document.createElement('canvas');
-		var context = canvas.getContext('2d');
+	// function take a screenshot and append it to the output div
+	function takeshot() {
+            let div =
+                document.getElementById('signature');
+  
+            html2canvas(div).then(
+                function (canvas) {
+                    document
+                    .getElementById('output')
+                    .appendChild(canvas);
+                })
+        }
 
-		// Define as dimensões do canvas
-		canvas.width = width;
-		canvas.height = height;
-	
-		// Captura a área especificada da tela no canvas
-		context.drawImage(window.screen.availLeft + left, window.screen.availTop + top, width, height, 0, 0, width, height);
-
-	
-alert("OK");	
-	// Converte o conteúdo do canvas para um data URL no formato JPG
-		var dataURL = canvas.toDataURL('image/jpeg');
-
-		// Cria um elemento de link temporário
-		var link = document.createElement('a');
-		link.href = dataURL;
-		link.download = 'captura.jpg';
-
-		// Simula um clique no link para iniciar o download
-		link.click();
-	}
+	showSignature();
   </script>
 </body>
+
 	</br>
 	<input type="button" Value="Voltar" onclick="history.go(-1)">
-	<input type="button" Value="Salvar" onclick="capturarAreaDaTela(10, 10, 400, 200)">
+	<input type="button" Value="Salvar" onclick="takeshot()">
+
+	<p>Clique no botão [Salvar] acima para gerar a imagem logo abaixo:</p>
+	
+	<div id="output"></div>
+	
 </html>

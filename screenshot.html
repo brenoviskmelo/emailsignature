@@ -1,0 +1,27 @@
+function capturarAreaDaTela(top, left, width, height) {
+    // Cria um elemento de canvas temporário
+    var canvas = document.createElement('canvas');
+    var context = canvas.getContext('2d');
+
+    // Define as dimensões do canvas
+    canvas.top = top;
+    canvas.left = left;
+    canvas.width = width;
+    canvas.height = height;
+        
+    // Captura a área especificada da tela no canvas
+    context.drawImage(window.screen.availLeft + left, window.screen.availTop + top, width, height, 0, 0, width, height);
+
+
+alert("OK");	
+// Converte o conteúdo do canvas para um data URL no formato JPG
+    var dataURL = canvas.toDataURL('image/jpeg');
+
+    // Cria um elemento de link temporário
+    var link = document.createElement('a');
+    link.href = dataURL;
+    link.download = 'captura.jpg';
+
+    // Simula um clique no link para iniciar o download
+    link.click();
+}
