@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Gerador de Assinatura de E-mail Rede Primavera</title>
+</head>
+<body>
+  <script>
+    function exibirAssinatura() {
+		var urlParams = new URLSearchParams(window.location.search);
+		var nome = urlParams.get('nome');
+		var funcao = urlParams.get('funcao');
+		var telefone = urlParams.get('telefone');
+		var celular = urlParams.get('celular');
+		var ramal = urlParams.get('ramal');
+		var email = urlParams.get('email');
+		var logomarca = urlParams.get('logomarca');
+	  
+		document.write('<font size="2,5px" face="calibri"></br>');
+		document.write('Atenciosamente,' + '</br></br>');
+		document.write('<b>' + decodeURIComponent(nome) + '</b></br>');
+		document.write('<b>' + decodeURIComponent(funcao) + '</b></br>');
+		document.write('<b>' + decodeURIComponent(telefone) + ' / ' + decodeURIComponent(celular) + ' / Ramal ' + decodeURIComponent(ramal) + '</b></br>');
+		document.write('<a href="mailto:' + decodeURIComponent(email) + '">' + decodeURIComponent(email) + '</a></b></br>');
+		document.write('<a href="www.redeprimavera.com.br">www.redeprimavera.com.br</a></br></br>');
+		document.write('</font>');
+
+		if (logomarca === "HP") {
+			document.write('<img src="imagem-hospital-primavera.jpg" alt="" width="480" height=""></br>');
+		} else {
+			document.write('<img src="imagem-hospital-coracao.jpg" alt="" width="480" height=""></br>');
+		}
+
+		document.write('<div style="position:relative;width:500px"><font size="1" face="calibri" color="gray">Esta mensagem, incluindo seus anexos, é material corporativo de uso privado, tem caráter confidencial e sigiloso protegido por lei, sendo proibida sua utilização, divulgação, cópia ou distribuição por qualquer pessoa diferente do destinatário. Caso tenha sido recebida por engano, queira, por favor, notificar o remetente.</font></div>');
+	}
+	
+	exibirAssinatura();
+	
+	function capturarAreaDaTela(left, top, width, height) {
+		// Cria um elemento de canvas temporário
+		var canvas = document.createElement('canvas');
+		var context = canvas.getContext('2d');
+
+		// Define as dimensões do canvas
+		canvas.width = width;
+		canvas.height = height;
+	
+		// Captura a área especificada da tela no canvas
+		context.drawImage(window.screen.availLeft + left, window.screen.availTop + top, width, height, 0, 0, width, height);
+
+	
+alert("OK");	
+	// Converte o conteúdo do canvas para um data URL no formato JPG
+		var dataURL = canvas.toDataURL('image/jpeg');
+
+		// Cria um elemento de link temporário
+		var link = document.createElement('a');
+		link.href = dataURL;
+		link.download = 'captura.jpg';
+
+		// Simula um clique no link para iniciar o download
+		link.click();
+	}
+  </script>
+</body>
+	</br>
+	<input type="button" Value="Voltar" onclick="history.go(-1)">
+	<input type="button" Value="Salvar" onclick="capturarAreaDaTela(10, 10, 400, 200)">
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Gerador de Assinatura de E-mail Rede Primavera</title>
+	<script>
+		// Formata os campos Telefone, Celular e Ramal
+		function FormataTelefone(Campo) {
+			var id = Campo.id;
+			var numero = Campo.value;
+			
+			numero = numero.replace(/\D/g, ""); // Remove qualquer caractere que não seja número
+				
+			if (numero.length > 9) {
+				numero = numero.replace(/^(\d{2})(\d)/g,"($1) $2"); // Incluí parênteses nos dois primeiros dígitos
+				numero = numero.replace(/(\d)(\d{4})$/,"$1-$2"); // Sepera do quantro ou cinco dígitos e inclui o hífen
+			}
+			document.getElementById(id).value = numero;
+		}
+		
+		function GerarAssinatura(){
+			var nome = document.getElementById("nome").value;
+			var funcao = document.getElementById("funcao").value;
+			var telefone = document.getElementById("telefone").value;
+			var celular = document.getElementById("celular").value;
+			var ramal = document.getElementById("ramal").value;
+			var email = document.getElementById("email").value;
+			
+			var logomarca = null;
+			var radios = document.getElementsByName("logomarca");
+			
+			// Verifica qual imagem será utilizada para gerar a assinatura
+			for (var i = 0; i < radios.length; i++) {
+				if (radios[i].checked) {
+				logomarca = radios[i].value;
+				}
+			}
+			
+			// Verificar se os campos foram preenchidos
+			if (nome === "" || funcao === "" || telefone === "" || celular === "" || ramal === "" || email === "" || logomarca === "") {
+				alert("Por favor, preencha todos os campos.");
+				return false;
+			}
+			
+			// Passa os valores dos campos preenchidos como parametros para a página que irá gerar a assinaura 
+			var redirectUrl = "exibir_assinatura.html" +
+							"?nome=" + nome +
+							"&funcao=" + funcao +
+							"&telefone=" + telefone +
+							"&celular=" + celular +
+							"&ramal=" + ramal +
+							"&email=" + email +
+							"&logomarca=" + logomarca;
+			
+			window.location.href = redirectUrl;
+			return false;
+	}
+	</script>
+</head>
+<body>
+	<img src="logo.jpg" alt="" width="" height="">
+
+	<h2>Gerador de Assinatura de E-mail</h2>
+
+	<p>Preencha todos os campos abaixo conforme exemplo indicado e clique no botão enviar.</p>
+
+	<form action="" method="get" onsubmit="return GerarAssinatura()">
+		<label for="nome">Nome Completo</label></br>
+		<input type="text" id="nome" size="40" required value="Breno Macedo de Melo"> <span style="color:gray">Exemplo: João José de Joca</span></br></br>
+
+		<label for="funcao">Função</label></br>
+		<input type="text" id="funcao" size="40" required value="Coordenador Administrativo e Infraestrutura de TI"> <span style="color:gray">Exemplo: Enfermeiro</span><br></br>
+
+		<label for="email">E-mail</label></br>
+		<input type="email" id="email" size="40" required value="brenomelo@redeprimavera.com.br"> <span style="color:gray">Exemplo: joaojose@redeprimavera.com.br</span><br><br>
+
+		<label for="telefone">Telefone</label></br>
+		<input type="tel" id="telefone" size="20" required value="7920252600" onblur="FormataTelefone(this)"> <span style="color:gray">Exemplo: 79 2105-2600</span><br></br>
+
+		<label for="celular">Celular</label></br>
+		<input type="tel" id="celular" size="20" required value="79999957855" onblur="FormataTelefone(this)"> <span style="color:gray">Exemplo: 79 91234-9876</span><br><br>
+
+		<label for="ramal">Ramal</label></br>
+		<input type="text" id="ramal" size="20" required value="7498" onblur="FormataTelefone(this)"> <span style="color:gray">Exemplo: 9090</span><br>
+
+		<p>
+			Qual imagem será utilizada na assinatura?
+				
+			<input type="radio" name="logomarca" id="hp" value="HP" checked>
+			<label for="hp">Hospital Primavera</label>
+
+			<input type="radio" name="logomarca" id="hcor" value="HCOR">
+			<label for="hcor">Hospital do Coração</label>		
+		</p>
+		
+		</br>
+		
+		<input type="reset" value="Limpar">
+		<input type="submit" value="Enviar">
+	</form>
+</body>
+</html>
