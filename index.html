@@ -1,8 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>Gerador de Assinatura de E-mail Rede Primavera</title>
+    
+	<title>Gerador de Assinatura de E-mail Rede Primavera</title>
+	
+	<style>	
+		body {
+			font-family: Arial, Helvetica, sans-serif
+		}
+
+		div span{
+			font-size: small;
+			color:gray;
+		}
+
+		#divForm {
+			float: left;
+			width: 47%;
+		}
+
+		#divImages {
+			float: left;
+			width: 53%;
+		}
+
+		img {
+			width: 300px;
+		}
+
+		footer p {
+			font-size: small;
+			color:gray;
+		}
+	</style>
+	
 	<script>
 		// Formata os campos Telefone, Celular e Ramal
 		function FormataTelefone(Campo) {
@@ -58,45 +90,71 @@
 	</script>
 </head>
 <body>
+	
+		
+	
 	<img src="logo.jpg" alt="" width="" height="">
 
 	<h2>Gerador de Assinatura de E-mail</h2>
 
-	<p>Preencha todos os campos abaixo conforme exemplo indicado e clique no botão enviar.</p>
-
+	<div class="tab">	
+		<button class="tablinks" onclick="openTabIndividual(event, 'tabIdividual')" >Assinatura Individual</button>
+		<button class="tablinks" onclick="openTabLote(event, 'tabLote')">Assinaturas em Lote</button>
+	</div>
+	
+	<p>Preencha todos os campos abaixo, conforme exemplo indicado, escolha a imagem da assinatura e clique no botão Gerar Assinatura.</p>
+	
 	<form action="" method="get" onsubmit="return GerarAssinatura()">
-		<label for="nome">Nome Completo</label></br>
-		<input type="text" id="nome" size="40" required value="Breno Macedo de Melo"> <span style="color:gray">Exemplo: João José de Joca</span></br></br>
+	
+		<div id="divForm">
+			<label for="nome">Nome Completo</label></br>
+			<input type="text" id="nome" size="40" required value=""> <span>Exemplo: João José de Joca</span></br></br>
 
-		<label for="funcao">Função</label></br>
-		<input type="text" id="funcao" size="40" required value="Coordenador Administrativo e Infraestrutura de TI"> <span style="color:gray">Exemplo: Enfermeiro</span><br></br>
+			<label for="funcao">Função</label></br>
+			<input type="text" id="funcao" size="40" required value=""> <span>Exemplo: Enfermeiro</span><br></br>
 
-		<label for="email">E-mail</label></br>
-		<input type="email" id="email" size="40" required value="brenomelo@redeprimavera.com.br"> <span style="color:gray">Exemplo: joaojose@redeprimavera.com.br</span><br><br>
+			<label for="email">E-mail</label></br>
+			<input type="email" id="email" size="40" required value=""> <span>Exemplo: joaojose@dominio.com.br</span><br><br>
 
-		<label for="telefone">Telefone</label></br>
-		<input type="tel" id="telefone" size="20" required value="7920252600" onblur="FormataTelefone(this)"> <span style="color:gray">Exemplo: 79 2105-2600</span><br></br>
+			<label for="telefone">Telefone</label></br>
+			<input type="tel" id="telefone" size="20" required value="" onblur="FormataTelefone(this)"> <span>Exemplo: 7921052600</span><br></br>
 
-		<label for="celular">Celular</label></br>
-		<input type="tel" id="celular" size="20" required value="79999957855" onblur="FormataTelefone(this)"> <span style="color:gray">Exemplo: 79 91234-9876</span><br><br>
+			<label for="celular">Celular</label></br>
+			<input type="tel" id="celular" size="20" required value="" onblur="FormataTelefone(this)"> <span>Exemplo: 79912349876</span><br><br>
 
-		<label for="ramal">Ramal</label></br>
-		<input type="text" id="ramal" size="20" required value="7498" onblur="FormataTelefone(this)"> <span style="color:gray">Exemplo: 9090</span><br>
-
-		<p>
-			Qual imagem será utilizada na assinatura?
-				
-			<input type="radio" name="logomarca" id="hp" value="HP" checked>
-			<label for="hp">Hospital Primavera</label>
-
-			<input type="radio" name="logomarca" id="hcor" value="HCOR">
-			<label for="hcor">Hospital do Coração</label>		
-		</p>
+			<label for="ramal">Ramal</label></br>
+			<input type="text" id="ramal" size="20" required value="" onblur="FormataTelefone(this)"> <span>Exemplo: 9090</span><br>
+		</div>
 		
+		<div id="divImages"> 
+			<p>
+				Qual imagem será utilizada na assinatura?
+			</p>
+				
+			<div id="imgSignature"> 
+				<input type="radio" name="logomarca" id="hp" value="HP" checked>
+				<label for="hp">Hospital Primavera</label></br></br>
+				<img src="imagem-hospital-primavera.jpg">
+			</div>
+				
+			</br></br>
+
+			<div id="imgSignature"> 
+				<input type="radio" name="logomarca" id="hcor" value="HCOR">
+				<label for="hcor">Hospital do Coração</label></br></br>		
+				<img src="imagem-hospital-coracao.jpg">
+			</div>
+		</div>
+
 		</br>
 		
 		<input type="reset" value="Limpar">
-		<input type="submit" value="Enviar">
+		<input type="submit" value="Gerar Assinatura">
 	</form>
+
+	<footer>
+		<p>Copyright © 2024</br>
+			brenoviskmelo</p>
+	</footer>
 </body>
 </html>
