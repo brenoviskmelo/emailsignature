@@ -19,6 +19,12 @@
             padding: 4px;
 			width: 500px;
         }
+
+		ol {
+			width: 650px;
+			font-size: small;
+			line-height: 150%;
+		}
 	</style>	
 </head>
 <body>
@@ -75,9 +81,14 @@
 	<input type="button" Value="Voltar" onclick="history.go(-1)">
 	<input type="button" Value="Gerar Imagem" onclick="takeshot()">
 
-	<p>Clique no botão [Gerar Imagem] acima para gerar a imagem logo abaixo:</p>
+	<p>
+		<h5>Orientações:</h5>
+		<ol>
+			<li>Selecione a assinatura acima, copie (CRTL+C) e cole (CTRL+P) na tela de configuração da assinatura no webmail ou gerenciador de e-mail (Outlook, Thunderbird, etc.).</li>
+			<li>Caso queira salvar a assinatura como imagem, clique no botão [Gerar Imagem].  Uma imagem será gerada logo abaixo. Clique com o botão direito sobre a image e escolhas o item [Salvar imagem como...]</li>
+		</ol>
+	</p>
 	
-	<a>
 	<div id="capturaAssinatura"></div>
-	</a>
+	
 </html>
